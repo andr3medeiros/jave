@@ -1,0 +1,67 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>it.sauronsoftware</groupId>
+	<artifactId>jave</artifactId>
+	<version>1.0.3</version>
+	<packaging>jar</packaging>
+
+	<name>jave</name>
+	<url>http://www.sauronsoftware.it/projects/jave/index.php</url>
+
+	<properties>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<description>JAVE
+The JAVE (Java Audio Video Encoder) library is Java wrapper on the ffmpeg project. Developers can take take advantage of JAVE to transcode audio and video files from a format to another. In example you can transcode an AVI file to a MPEG one, you can change a DivX video stream into a (youtube like) Flash FLV one, you can convert a WAV audio file to a MP3 or a Ogg Vorbis one, you can separate and transcode audio and video tracks, you can resize videos, changing their sizes and proportions and so on. Many other formats, containers and operations are supported by JAVE.
+
+Requirements
+JAVE requires a J2SE environment 1.4 or later and a Windows or Linux OS on a i386 / 32 bit hardware architecture. JAVE can also be easily ported to other OS and hardware configurations, see the JAVE manual for details.
+
+License
+JAVE is Free Software and it is licensed under GPL (you will find a copy of the license bundled into the downloadable software distribution).
+
+Feedback
+You can send comments and requests to Carlo Pelliccia.
+
+Make a donation
+JAVE is free, but if you find it useful please make a donation via PayPal.</description>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<distributionManagement>
+    <repository>
+      <id>andr3medeiros</id>
+      <name>andr3medeiros Github Repository</name>
+      <url>https://github.com/andr3medeiros/jave</url>
+    </repository>
+    
+  </distributionManagement>
+</project>
