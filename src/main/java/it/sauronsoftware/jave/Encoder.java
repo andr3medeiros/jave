@@ -173,7 +173,7 @@ public class Encoder {
 		int size = res.size();
 		String[] ret = new String[size];
 		for (int i = 0; i < size; i++) {
-			ret[i] = (String) res.get(i);
+			ret[i] = res.get(i);
 		}
 		return ret;
 	}
@@ -227,7 +227,7 @@ public class Encoder {
 		int size = res.size();
 		String[] ret = new String[size];
 		for (int i = 0; i < size; i++) {
-			ret[i] = (String) res.get(i);
+			ret[i] = res.get(i);
 		}
 		return ret;
 	}
@@ -280,7 +280,7 @@ public class Encoder {
 		int size = res.size();
 		String[] ret = new String[size];
 		for (int i = 0; i < size; i++) {
-			ret[i] = (String) res.get(i);
+			ret[i] = res.get(i);
 		}
 		return ret;
 	}
@@ -333,7 +333,7 @@ public class Encoder {
 		int size = res.size();
 		String[] ret = new String[size];
 		for (int i = 0; i < size; i++) {
-			ret[i] = (String) res.get(i);
+			ret[i] = res.get(i);
 		}
 		return ret;
 	}
@@ -393,7 +393,7 @@ public class Encoder {
 		int size = res.size();
 		String[] ret = new String[size];
 		for (int i = 0; i < size; i++) {
-			ret[i] = (String) res.get(i);
+			ret[i] = res.get(i);
 		}
 		return ret;
 	}
@@ -452,7 +452,7 @@ public class Encoder {
 		int size = res.size();
 		String[] ret = new String[size];
 		for (int i = 0; i < size; i++) {
-			ret[i] = (String) res.get(i);
+			ret[i] = res.get(i);
 		}
 		return ret;
 	}
@@ -548,7 +548,9 @@ public class Encoder {
 								+ (hours * 60L * 60L * 1000L);
 						info.setDuration(duration);
 						step++;
-					} else {
+					} if(line.contains("Duration: N/A")) {
+						step++;
+					} else if(!m.matches()) {
 						step = 3;
 					}
 				} else if (step == 2) {
@@ -650,6 +652,8 @@ public class Encoder {
 					break;
 				}
 			}
+			
+			reader.lines().forEach(line -> {});//flush
 		} catch (IOException e) {
 			throw new EncoderException(e);
 		}
@@ -834,16 +838,15 @@ public class Encoder {
 			long duration;
 			long progress = 0;
 			RBufferedReader reader = null;
-			reader = new RBufferedReader(new InputStreamReader(ffmpeg
-					.getErrorStream()));
+			reader = new RBufferedReader(new InputStreamReader(ffmpeg.getErrorStream()));
 			MultimediaInfo info = parseMultimediaInfo(source, reader);
 			if (durationAttribute != null) {
-				duration = (long) Math
+				duration = Math
 						.round((durationAttribute.floatValue() * 1000L));
 			} else {
 				duration = info.getDuration();
 				if (offsetAttribute != null) {
-					duration -= (long) Math
+					duration -= Math
 							.round((offsetAttribute.floatValue() * 1000L));
 				}
 			}
@@ -852,6 +855,7 @@ public class Encoder {
 			}
 			int step = 0;
 			String line;
+			
 			while ((line = reader.readLine()) != null) {
 				if (step == 0) {
 					if (line.startsWith("WARNING: ")) {
@@ -890,7 +894,7 @@ public class Encoder {
 							lastWarning = line;
 						} else {
 							if (listener != null) {
-								String time = (String) table.get("time");
+								String time = table.get("time");
 								if (time != null) {
 									int dot = time.indexOf('.');
 									if (dot > 0 && dot == time.length() - 2
@@ -932,4 +936,7 @@ public class Encoder {
 		}
 	}
 
+	public static void main(String[] args) {
+		
+	}
 }

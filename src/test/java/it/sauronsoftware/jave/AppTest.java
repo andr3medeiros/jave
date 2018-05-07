@@ -35,7 +35,7 @@ public class AppTest extends TestCase {
         return new File(classLoader.getResource(path).getFile());
     }
 
-    public void testVideoToAudio() throws IOException, IllegalArgumentException, InputFormatException, EncoderException {
+    public void testMP4VideoToAudio() throws IOException, IllegalArgumentException, InputFormatException, EncoderException {
     	File testFile = getTestFile("surfando_de_helicoptero.mp4");
     	File outFile = File.createTempFile("jave", ".ogg");
     	
@@ -57,4 +57,29 @@ public class AppTest extends TestCase {
         assertEquals( "Right format",  targetInfo.getFormat(), "ogg");
         assertTrue("Duration is within right range 'cause it's never gone equal", sourceInfo.getDuration() >= targetInfo.getDuration());
     }
+
+   /* public void testASFVideoToFLACAudio() throws IOException, IllegalArgumentException, InputFormatException, EncoderException {
+        Encoder encoder = new Encoder();
+		
+		File testFile = getTestFile("audiencia_168798035_2_V.asf");
+		File outFile = File.createTempFile("jave-tests-audiencia", ".flac");
+		
+		EncodingAttributes attributes = new EncodingAttributes();
+		attributes.setFormat("flac");
+		AudioAttributes audioAttributes = new AudioAttributes();
+		audioAttributes.setCodec("flac");
+		audioAttributes.setSamplingRate(44100);
+		audioAttributes.setChannels(1);
+		audioAttributes.setCodec("flac");
+		attributes.setAudioAttributes(audioAttributes);
+        encoder.encode(testFile, outFile, attributes);
+
+        MultimediaInfo sourceInfo = encoder.getInfo(testFile);
+        MultimediaInfo targetInfo = encoder.getInfo(outFile);
+        
+        assertEquals( "Right channel count",  targetInfo.getAudio().getChannels(), 1);
+        assertEquals( "Right sampling rate",  targetInfo.getAudio().getSamplingRate(), 44100);
+        assertEquals( "Right format",  targetInfo.getFormat(), "flac");
+        assertTrue("Duration is within right range 'cause it's never gone equal", sourceInfo.getDuration() >= targetInfo.getDuration());
+    }*/
 }

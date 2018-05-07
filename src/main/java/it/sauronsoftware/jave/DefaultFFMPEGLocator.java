@@ -92,6 +92,7 @@ public class DefaultFFMPEGLocator extends FFMPEGLocator {
 		this.path = exe.getAbsolutePath();
 	}
 
+	@Override
 	protected String getFFMPEGExecutablePath() {
 		return path;
 	}
@@ -110,7 +111,8 @@ public class DefaultFFMPEGLocator extends FFMPEGLocator {
 		InputStream input = null;
 		OutputStream output = null;
 		try {
-			input = getClass().getResourceAsStream(path);
+			ClassLoader classLoader = getClass().getClassLoader();
+			input = classLoader.getResourceAsStream(path);
 			output = new FileOutputStream(dest);
 			byte[] buffer = new byte[1024];
 			int l;
